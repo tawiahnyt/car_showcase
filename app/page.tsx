@@ -4,6 +4,8 @@ import CarCard from "@/components/CarCard";
 import CustomFilter from "@/components/CustomFilter";
 import Hero from "@/components/Hero";
 import SearchBar from "@/components/SearchBar";
+import ShowMore from "@/components/ShowMore";
+import { fuels, yearsOfProduction } from "@/constants";
 import { fetchCars } from "@/utils";
 import { log } from "console";
 
@@ -12,8 +14,8 @@ export default async function Home({ searchParams }) {
     manufacturer: searchParams.manufacturer || "",
     model: searchParams.model || "",
     fuel: searchParams.fuel || "",
-    year: searchParams.year ||"",
-    // limit: searchParams.limit || 10,
+    year: searchParams.year ||2020,
+    limit: searchParams.limit || 10,
   });
 
   log(allCars);
@@ -35,8 +37,8 @@ export default async function Home({ searchParams }) {
           <SearchBar />
 
           <div className="home__filter-container">
-            <CustomFilter title="fuel" />
-            <CustomFilter title="year" />
+            <CustomFilter title="fuel" options={fuels} />
+            <CustomFilter title="year" options={yearsOfProduction} />
           </div>
         </div>
 
@@ -47,6 +49,8 @@ export default async function Home({ searchParams }) {
                 <CarCard car={car} key={car} />
               ))}
             </div>
+
+            <ShowMore pageNumber={(searchParams.limit || 10) / 10 } isNext={(searchParams.limit || 10) > allCars.length } />
           </section>
         ) : (
           <div className="home__error-container">

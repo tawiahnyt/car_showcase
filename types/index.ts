@@ -36,6 +36,21 @@ export interface FilterProps {
   manufacturer: string
     model: string
     year: number
-    // limit: number
+    limit: number
     fuel: string
+}
+
+export interface OptionProps {
+  value: string
+  title: string
+}
+
+export interface CustomFilterProps {
+  title: string
+  options: OptionProps[]
+}
+
+export interface ShowMoreProps {
+  pageNumber: number
+  isNext: boolean
 }

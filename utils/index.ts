@@ -3,10 +3,7 @@
 import { CarProps, FilterProps } from "@/types";
 
 export async function fetchCars(filters: FilterProps) {
-
-  // const { manufacturer, model, year, limit } = filters;
-  const { manufacturer, model, year } = filters;
-
+  const { manufacturer, model, year, limit, fuel } = filters;
   const headers = {
     "x-rapidapi-key": "74d07861e2msh3455da1ad8d5ff6p1c5c17jsn9c9db0d3367f",
     "x-rapidapi-host": "cars-by-api-ninjas.p.rapidapi.com",
@@ -18,7 +15,7 @@ export async function fetchCars(filters: FilterProps) {
   // );
 
   const response = await fetch(
-    `https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?make=${manufacturer}&year=${year}&model=${model}&fuel_type={fuel}`,
+    `https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?make=${manufacturer}&year=${year}&model=${model}&fuel_type=${fuel}`,
     { headers: headers }
   );
 
@@ -43,16 +40,26 @@ export const calculateCarRent = (city_mpg: number, year: number) => {
 };
 
 export const generateCarImageUrl = (car: CarProps, angle?: string) => {
-  const url = new URL('https://cdn.imagin.studio/getimage')
+  const url = new URL("https://cdn.imagin.studio/getimage");
 
-  const {make, year, model} = car
+  const { make, year, model } = car;
 
-  url.searchParams.append('customer', 'img')
-  url.searchParams.append('make', make)
-  url.searchParams.append("modelFamily", model.split(' ')[0]);
-  url.searchParams.append("zoomType", 'fullscreen');
+  url.searchParams.append("customer", "img");
+  url.searchParams.append("make", make);
+  url.searchParams.append("modelFamily", model.split(" ")[0]);
+  url.searchParams.append("zoomType", "fullscreen");
   url.searchParams.append("modelYear", `${year}`);
   url.searchParams.append("angle", `${angle}`);
 
-  return `${url}`
-}
+  return `${url}`;
+};
+
+export const updateSearchParams = (type: string, value: string) => {
+  const searchParams = new URLSearchParams(window.location.search);
+
+  searchParams.set(type, value);
+
+  const newPathName = `${window.location.pathname}?${searchParams.toString()}`;
+
+  return newPathName;
+};
