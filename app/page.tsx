@@ -5,9 +5,18 @@ import CustomFilter from "@/components/CustomFilter";
 import Hero from "@/components/Hero";
 import SearchBar from "@/components/SearchBar";
 import { fetchCars } from "@/utils";
+import { log } from "console";
 
-export default async function Home() {
-  const allCars = await fetchCars();
+export default async function Home({ searchParams }) {
+  const allCars = await fetchCars({
+    manufacturer: searchParams.manufacturer || "",
+    model: searchParams.model || "",
+    fuel: searchParams.fuel || "",
+    year: searchParams.year ||"",
+    // limit: searchParams.limit || 10,
+  });
+
+  log(allCars);
 
   const isDataEmpty =
     !Array.isArray(allCars) || allCars.length === 0 || !allCars;
