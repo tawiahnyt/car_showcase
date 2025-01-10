@@ -75,7 +75,7 @@ const CarDetails = ({ isOpen, closeModal, car }: CarDetailsProps) => {
                     <div className="flex gap-3">
                       <div className="flex-1 relative w-full h-24 bg-primary-blue-100">
                         <Image
-                          src={generateCarImageUrl(car, '29')}
+                          src={generateCarImageUrl(car, "29")}
                           alt="car model"
                           fill
                           priority
@@ -84,7 +84,7 @@ const CarDetails = ({ isOpen, closeModal, car }: CarDetailsProps) => {
                       </div>
                       <div className="flex-1 relative w-full h-24 bg-primary-blue-100">
                         <Image
-                          src={generateCarImageUrl(car, '33')}
+                          src={generateCarImageUrl(car, "33")}
                           alt="car model"
                           fill
                           priority
@@ -93,7 +93,7 @@ const CarDetails = ({ isOpen, closeModal, car }: CarDetailsProps) => {
                       </div>
                       <div className="flex-1 relative w-full h-24 bg-primary-blue-100">
                         <Image
-                          src={generateCarImageUrl(car, '13')}
+                          src={generateCarImageUrl(car, "13")}
                           alt="car model"
                           fill
                           priority
@@ -109,12 +109,21 @@ const CarDetails = ({ isOpen, closeModal, car }: CarDetailsProps) => {
                     </h2>
 
                     <div className="mt-3 flex flex-wrap gap-4">
-                      {Object.entries(car).map(([key, value]) => (
-                        <div className="flex justify-between gap-5 w-full text-right" key={key}>
-                          <h4 className="text-grey capitalize">{key.split('_').join(' ')}</h4>
-                          <p className="text-black-100 font-semibold">{value}</p>
-                        </div>
-                      ))}
+                      {Object.entries(car)
+                        .filter(([key]) => key !== "_id")
+                        .map(([key, value]) => (
+                          <div
+                            className="flex justify-between gap-5 w-full text-right"
+                            key={key}
+                          >
+                            <h4 className="text-grey capitalize">
+                              {key.split("_").join(" ")}
+                            </h4>
+                            <p className="text-black-100 font-semibold">
+                              {value}
+                            </p>
+                          </div>
+                        ))}
                     </div>
                   </div>
                 </DialogPanel>

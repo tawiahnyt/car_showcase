@@ -29,11 +29,7 @@ const SearchBar = () => {
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (manufacturer === "" || model === "") {
-      return alert("Please fill in the search fields");
-    }
-
-    updateSearchParam(model.toLocaleLowerCase(), manufacturer.toLocaleLowerCase());
+    updateSearchParam(model, manufacturer);
   };
 
   const updateSearchParam = (model: string, manufacturer: string) => {
@@ -55,7 +51,15 @@ const SearchBar = () => {
       window.location.pathname
     }?${searchParams.toString()}`;
 
-    router.push(newPathName);
+    router.push(newPathName, { scroll: false });
+  };
+
+  const toTitleCase = (str: string): string => {
+    return str
+      .toLowerCase()
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
   };
 
   return (
@@ -80,7 +84,7 @@ const SearchBar = () => {
           type="text"
           name="model"
           value={model}
-          onChange={(e) => setModel(e.target.value)}
+          onChange={(e) => setModel(toTitleCase(e.target.value))}
           placeholder="Tiguan"
           className="searchbar__input"
         />

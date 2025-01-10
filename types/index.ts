@@ -7,7 +7,7 @@ export interface CustomButtonProps {
   containerStyles: string;
   handleClick?: MouseEventHandler<HTMLButtonElement>;
   btnType?: "button" | "submit";
-  textStyles?: string
+  textStyles?: string;
   rightIcon?: string;
   isDisabled?: boolean;
 }
@@ -33,24 +33,27 @@ export interface CarProps {
 }
 
 export interface FilterProps {
-  manufacturer: string
-    model: string
-    year: number
-    limit: number
-    fuel: string
+  manufacturer: string;
+  model: string;
+  year: number;
+  limit: number;
+  fuel: string;
 }
 
 export interface OptionProps {
-  value: string
-  title: string
+  value: string;
+  title: string;
 }
 
 export interface CustomFilterProps {
-  title: string
-  options: OptionProps[]
+  title: string;
+  options: OptionProps[];
 }
 
 export interface ShowMoreProps {
-  pageNumber: number
-  isNext: boolean
+  pageNumber: number;
+  isNext: boolean;
+}
+export interface HomeProps {
+  searchParams: FilterProps;
 }

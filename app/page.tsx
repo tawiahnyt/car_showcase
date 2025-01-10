@@ -6,16 +6,17 @@ import Hero from "@/components/Hero";
 import SearchBar from "@/components/SearchBar";
 import ShowMore from "@/components/ShowMore";
 import { fuels, yearsOfProduction } from "@/constants";
+import { HomeProps } from "@/types";
 import { fetchCars } from "@/utils";
 import { log } from "console";
 
-export default async function Home({ searchParams }) {
+export default async function Home({ searchParams }: Readonly<HomeProps>) {
   const allCars = await fetchCars({
     manufacturer: searchParams.manufacturer || "",
-    model: searchParams.model || "",
+    year: searchParams.year || 2022,
     fuel: searchParams.fuel || "",
-    year: searchParams.year ||2020,
     limit: searchParams.limit || 10,
+    model: searchParams.model || "",
   });
 
   log(allCars);
@@ -46,11 +47,14 @@ export default async function Home({ searchParams }) {
           <section>
             <div className="home__cars-wrapper">
               {allCars?.map((car) => (
-                <CarCard car={car} key={car} />
+                <CarCard car={car} key={car._id} />
               ))}
             </div>
 
-            <ShowMore pageNumber={(searchParams.limit || 10) / 10 } isNext={(searchParams.limit || 10) > allCars.length } />
+            <ShowMore
+              pageNumber={(searchParams.limit || 10) / 10}
+              isNext={(searchParams.limit || 10) > allCars.length}
+            />
           </section>
         ) : (
           <div className="home__error-container">
