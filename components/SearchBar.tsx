@@ -36,7 +36,7 @@ const SearchBar = () => {
     const searchParams = new URLSearchParams(window.location.search);
 
     if (model) {
-      searchParams.set("model", model);
+      searchParams.set("model", model.toLocaleLowerCase());
     } else {
       searchParams.delete("model");
     }
@@ -52,14 +52,6 @@ const SearchBar = () => {
     }?${searchParams.toString()}`;
 
     router.push(newPathName, { scroll: false });
-  };
-
-  const toTitleCase = (str: string): string => {
-    return str
-      .toLowerCase()
-      .split(" ")
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(" ");
   };
 
   return (
@@ -84,7 +76,7 @@ const SearchBar = () => {
           type="text"
           name="model"
           value={model}
-          onChange={(e) => setModel(toTitleCase(e.target.value))}
+          onChange={(e) => setModel(e.target.value.toLocaleLowerCase())}
           placeholder="Tiguan"
           className="searchbar__input"
         />

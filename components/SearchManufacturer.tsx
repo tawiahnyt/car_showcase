@@ -49,7 +49,7 @@ const SearchManufacturer = ({
             className={"search-manufacturer__input"}
             placeholder="Volkswagen"
             displayValue={(manufacturer: string) => manufacturer}
-            onChange={(e) => setQuery(e.currentTarget.value)}
+            onChange={(e) => setQuery(e.currentTarget.value.toLocaleLowerCase())}
           />
 
           <Transition
