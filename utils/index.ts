@@ -1,15 +1,21 @@
 /** @format */
 
 import { CarProps, FilterProps } from "@/types";
+import axios from "axios";
 
 export async function fetchCars(filters: FilterProps) {
   const { manufacturer, model, year, limit, fuel } = filters;
 
-  const response = await fetch(
-    `http://localhost:3000/api/v1/cars?make=${manufacturer}&year=${year}&model=${model}&limit=${limit}&fuel_type=${fuel}`
+  // const response = await fetch(
+  //   `http://localhost:3000/api/v1/cars?model=${model}&make=${manufacturer}&year=${year}&limit=${limit}&fuel_type=${fuel}`
+  // );z
+
+  const res = await axios.get(
+    `https://car-api-r8mq.onrender.com/api/v1/cars?model=${model}&make=${manufacturer}&year=${year}&limit=${limit}&fuel_type=${fuel}`
   );
 
-  const result = response.json();
+  const result = res?.data;
+
 
   return result;
 }
