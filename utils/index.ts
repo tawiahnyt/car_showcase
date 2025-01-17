@@ -11,7 +11,7 @@ export async function fetchCars(filters: FilterProps) {
   // );z
 
   const res = await axios.get(
-    `https://car-api-r8mq.onrender.com/api/v1/cars?model=${model}&make=${manufacturer}&year=${year}&limit=${limit}&fuel_type=${fuel}`
+    `https://car-api-aoim.onrender.com/api/v1/cars?model=${model}&make=${manufacturer}&year=${year}&limit=${limit}&fuel_type=${fuel}`
   );
 
   const result = res?.data;
